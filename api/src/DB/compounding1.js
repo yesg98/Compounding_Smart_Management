@@ -9,8 +9,9 @@ exports.addData = async (ctx) =>{
 
 exports.findData = async(ctx)=>{
     console.log(ctx.request.body);
-    if(ctx.request.body.meltTemp==null){
-        console.log("error");
+    var data = ctx.request.body;
+    if(data.meltTempma==null){
+        data.meltTempma = await comp.findMaxM();
     }
     var data = await comp.findDataByAll(ctx.request.body);
     ctx.body = data;

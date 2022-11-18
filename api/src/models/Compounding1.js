@@ -19,11 +19,11 @@ Compounding1.statics.newData = function({polyState,mixRatio,extSpinspeed,extDiam
     return data.save();
 };
 
-Compounding1.statics.findDataByAll = function({meltTemp,stikic,tenStrength}){
-    return this.find({meltTemp,stikic,tenStrength}).exec();
+Compounding1.statics.findDataByAll = function({meltTempma,meltTempmi,stikicma,stikicmi,tenStrengthma,tenStrengthmi}){
+    return this.find({"meltTemp":{$lte:meltTempma,$gte:meltTempmi},"stikic":{$lte:stikicma,$gte:stikicmi},"tenStrength":{$lte:tenStrengthma,$gte:tenStrengthmi}}).exec();
 };
-Compounding1.statics.findDataByM = function({meltTemp}){
-    return this.find({meltTemp}).exec();
+Compounding1.statics.findMaxM = function(){
+    return this.findOne({"meltTemp":{$gte:0}},{"meltTemp":true,"_id":false}).sort({"meltTemp":-1}).exec();
 };
 Compounding1.statics.findDataByS = function({stikic}){
     return this.find({stikic}).exec();
